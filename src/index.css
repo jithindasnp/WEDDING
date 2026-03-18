@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties ── */
+:root {
+  --bg:   #FFF8FA;
+  --rose: #D4768E;
+  --blush:#F2B5C8;
+  --mauve:#9B6B7E;
+  --plum: #3D1A2E;
+  --fog:  rgba(255, 248, 250, 1);
+  --fog0: rgba(255, 248, 250, 0);
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--plum);
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #fff0f5; }
+  ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 3px; }
+}
+
+@layer utilities {
+  /* Light glass — works on white/blush background */
+  .glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 118, 142, 0.18);
+    box-shadow:
+      0 8px 40px rgba(212, 118, 142, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .glass-rose {
+    background: rgba(242, 181, 200, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 118, 142, 0.28);
+    box-shadow: 0 8px 32px rgba(212, 118, 142, 0.12);
+  }
+
+  /* Page mesh gradient */
+  .bg-mesh {
+    background:
+      radial-gradient(ellipse at 15% 40%, rgba(242,181,200,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(212,118,142,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 55% 85%, rgba(242,181,200,0.22) 0%, transparent 55%),
+      linear-gradient(145deg, #FFF8FA 0%, #FDFBF7 50%, #FFF0F5 100%);
+  }
+
+  /* Cinematic photo fog overlays */
+  .fog-border-top {
+    position: absolute;
+    top: -50px; left: 0; right: 0; height: 250px;
+    background-image: url('/fog.png');
+    background-size: cover;
+    background-position: bottom;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.85;
+    mask-image: linear-gradient(to bottom, transparent, black 50%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 50%, black 100%);
+  }
+  .fog-border-bottom {
+    position: absolute;
+    bottom: -50px; left: 0; right: 0; height: 250px;
+    background-image: url('/fog.png');
+    background-size: cover;
+    background-position: top;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.85;
+    mask-image: linear-gradient(to top, transparent, black 50%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent, black 50%, black 100%);
+  }
+}
+
+/* Bounce arrow */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
+.bounce-arrow { animation: bounce-slow 2s ease-in-out infinite; }
+
+/* Mesh blob drift */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 30px) scale(0.97); }
+}
+
+/* Number flip */
+@keyframes flip-in {
+  0%   { transform: rotateX(-90deg); opacity: 0; }
+  100% { transform: rotateX(0);      opacity: 1; }
+}

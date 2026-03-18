@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wedding-invite",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["D:/JD/start-dev.mjs"],
+      "port": 5175
+    }
+  ]
+}

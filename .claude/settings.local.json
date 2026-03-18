@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm --version)",
+      "Bash(timeout 30 npm run build)",
+      "Read(//tmp/062e91db-3be1-41e9-8703-c50837cbf6d4_8wgd8NuIISV6mmwz75zOPs.zip.6d4/**)",
+      "Read(//tmp/3149a8f0-2bc9-4bab-b076-a3fb81769c9d_8wgd8NuIISV6mmwz75zOPs.zip.c9d/**)",
+      "Read(//tmp/3a7787d5-a6ec-4e5f-92b1-6e36ccac95d7_8wgd8NuIISV6mmwz75zOPs.zip.5d7/**)",
+      "Read(//tmp/46e7cf38-53a6-47de-b2e6-23845fa63197_8wgd8NuIISV6mmwz75zOPs.zip.197/**)",
+      "Read(//tmp/917733fa-738a-4348-a52b-a76ecec7fdaf_8wgd8NuIISV6mmwz75zOPs.zip.daf/**)",
+      "Read(//tmp/daec425e-656a-4485-ab1c-bcc292431484_8wgd8NuIISV6mmwz75zOPs.zip.484/**)",
+      "Bash(xargs ls -lt)",
+      "Bash(cp \"/c/Users/ASUS/AppData/Local/Temp/1a3d4e6c-3484-49a0-9157-8261a353ef2d.tmp\" \"D:/JD/public/photos/check1.jpg\")",
+      "Bash(cp \"/c/Users/ASUS/AppData/Local/Temp/0f2e5f2e-6b8b-460d-b036-fd631268bf8a.tmp\" \"D:/JD/public/photos/check2.jpg\")",
+      "Bash(cp \"/c/Users/ASUS/AppData/Local/Temp/1ccf8c9e-414d-4a87-86ae-8b78fd87d8b5.tmp\" \"D:/JD/public/photos/check3.jpg\")",
+      "Bash(ls -lh D:/JD/public/photos/check*.jpg)"
+    ]
+  }
+}
