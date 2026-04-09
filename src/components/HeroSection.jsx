@@ -3,9 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
 /* ── Countdown helpers ── */
-const TARGET = new Date('2026-05-17T16:00:00')
-function getTimeLeft() {
-  const diff = TARGET - Date.now()
+function getTimeLeft(target) {
+  const diff = target - Date.now()
   if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }
   return {
     days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -58,18 +57,25 @@ const fadeUp = {
   }),
 }
 
-export default function HeroSection() {
-  const [time, setTime]   = useState(getTimeLeft())
-  const past              = TARGET <= new Date()
-  const sectionRef        = useRef(null)
+export default function HeroSection({
+  name1        = 'Jithindas',
+  name2        = 'Dr. Manasa',
+  dateLabel    = 'Sunday, May 17, 2026',
+  timeLabel    = 'Reception · 4:00 PM onwards',
+  countdownTarget = new Date('2026-05-17T16:00:00'),
+  heroBg       = '/photos/IMG-20250928-WA0042.jpg',
+  preLine      = 'Please join us to celebrate',
+}) {
+  const [time, setTime] = useState(getTimeLeft(countdownTarget))
+  const past            = countdownTarget <= new Date()
+  const sectionRef      = useRef(null)
 
   useEffect(() => {
     if (past) return
-    const id = setInterval(() => setTime(getTimeLeft()), 1000)
+    const id = setInterval(() => setTime(getTimeLeft(countdownTarget)), 1000)
     return () => clearInterval(id)
-  }, [past])
+  }, [past, countdownTarget])
 
-  /* Parallax — image scrolls slower than the page */
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
 
@@ -79,13 +85,10 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden"
     >
       {/* Parallax Background Image */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y: imgY }}
-      >
+      <motion.div className="absolute inset-0 z-0" style={{ y: imgY }}>
         <img
-          src="/photos/IMG-20250928-WA0042.jpg"
-          alt="Couple descending stairs"
+          src={heroBg}
+          alt="Couple"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center center', filter: 'brightness(0.78)', minHeight: '120%' }}
         />
@@ -116,14 +119,14 @@ export default function HeroSection() {
         <motion.p className="font-sans text-xs uppercase tracking-[0.35em] mb-5"
           style={{ color: 'rgba(255,255,255,0.82)' }}
           initial="hidden" animate="show" custom={0.2} variants={fadeUp}>
-          Please join us to celebrate
+          {preLine}
         </motion.p>
 
         {/* Names */}
         <motion.div initial="hidden" animate="show" custom={0.35} variants={fadeUp}>
           <h1 className="font-serif font-light leading-none text-white drop-shadow-lg"
             style={{ fontSize: 'clamp(3rem,10vw,6.5rem)' }}>
-            Jithindas
+            {name1}
           </h1>
         </motion.div>
 
@@ -137,7 +140,7 @@ export default function HeroSection() {
         <motion.div initial="hidden" animate="show" custom={0.65} variants={fadeUp}>
           <h1 className="font-serif font-light leading-none text-white drop-shadow-lg"
             style={{ fontSize: 'clamp(3rem,10vw,6.5rem)' }}>
-            Dr. Manasa
+            {name2}
           </h1>
         </motion.div>
 
@@ -155,18 +158,16 @@ export default function HeroSection() {
         <motion.div className="flex flex-col items-center gap-1 mb-10"
           initial="hidden" animate="show" custom={0.88} variants={fadeUp}>
           <p className="font-sans font-medium uppercase tracking-[0.3em] text-sm text-white drop-shadow-sm">
-            Sunday, May 17, 2026
+            {dateLabel}
           </p>
           <p className="font-sans text-xs uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Reception · 4:00 PM onwards
+            {timeLabel}
           </p>
         </motion.div>
 
-        {/* ── Embedded Countdown ── */}
-        <motion.div
-          initial="hidden" animate="show" custom={1.05} variants={fadeUp}
-          className="flex flex-col items-center gap-5"
-        >
+        {/* Countdown */}
+        <motion.div initial="hidden" animate="show" custom={1.05} variants={fadeUp}
+          className="flex flex-col items-center gap-5">
           <div className="flex items-center gap-3">
             <div className="h-px w-10" style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.4))' }} />
             <p className="font-sans text-[10px] uppercase tracking-[0.28em]" style={{ color: 'rgba(255,255,255,0.65)' }}>

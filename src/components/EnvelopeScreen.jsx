@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-export default function EnvelopeScreen({ onOpen }) {
+export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
   const [clicked, setClicked] = useState(false)
 
   const handleOpen = () => {
@@ -115,7 +115,7 @@ export default function EnvelopeScreen({ onOpen }) {
             <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
               <circle cx="27" cy="27" r="23" stroke="rgba(0,0,0,0.2)" strokeWidth="1" fill="none" />
               <circle cx="27" cy="27" r="20" stroke="rgba(255,255,255,0.18)" strokeWidth="0.5" fill="none" strokeDasharray="3 3" />
-              <text x="27" y="23" textAnchor="middle" fontFamily="Cormorant Garamond,serif" fontSize="10" fontWeight="600" fill="rgba(0,0,0,0.65)" letterSpacing="2">J&amp;M</text>
+              <text x="27" y="23" textAnchor="middle" fontFamily="Cormorant Garamond,serif" fontSize="10" fontWeight="600" fill="rgba(0,0,0,0.65)" letterSpacing="2">{monogram}</text>
               <line x1="15" y1="29" x2="39" y2="29" stroke="rgba(0,0,0,0.28)" strokeWidth="0.75" />
               <text x="27" y="38" textAnchor="middle" fontFamily="Montserrat,sans-serif" fontSize="5" fontWeight="700" fill="rgba(0,0,0,0.52)" letterSpacing="1.5">TAP TO OPEN</text>
             </svg>

@@ -2,7 +2,11 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Heart } from 'lucide-react'
 
-export default function FamilyHosts() {
+export default function FamilyHosts({
+  bg         = '/photos/IMG-20250928-WA0043.jpg',
+  quote      = 'With love from relatives & friends',
+  dateTag    = 'May 17 · 2026 &nbsp;·&nbsp; Jithindas &amp; Dr. Manasa',
+}) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
@@ -17,14 +21,10 @@ export default function FamilyHosts() {
         </svg>
       </div>
 
-      {/* Parallax Background — dark matching other sections */}
+      {/* Parallax Background */}
       <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: imgY }}>
-        <img
-          src="/photos/IMG-20250928-WA0043.jpg"
-          alt="Wedding background"
-          className="w-full object-cover"
-          style={{ objectPosition: 'center center', filter: 'brightness(0.48)', height: '120%', minHeight: '100%' }}
-        />
+        <img src={bg} alt="Wedding background" className="w-full object-cover"
+          style={{ objectPosition: 'center center', filter: 'brightness(0.48)', height: '120%', minHeight: '100%' }} />
         <div className="absolute inset-0 bg-black/35 mix-blend-multiply" />
       </motion.div>
 
@@ -42,29 +42,25 @@ export default function FamilyHosts() {
           <div className="h-px w-14" style={{ background: 'linear-gradient(90deg,rgba(242,181,200,0.5),transparent)' }} />
         </motion.div>
 
-        {/* With love from label */}
-        <motion.div
-          className="flex flex-col items-center gap-3 mt-16"
+        {/* Quote */}
+        <motion.div className="flex flex-col items-center gap-3 mt-16"
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        >
-           <p className="font-serif italic font-light drop-shadow-xl" style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(1.5rem, 5vw, 2.8rem)' }}>
-            With love from relatives &amp; friends
-          </p>
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>
+          <p className="font-serif italic font-light drop-shadow-xl"
+            style={{ color: 'rgba(255,255,255,0.95)', fontSize: 'clamp(1.5rem, 5vw, 2.8rem)' }}
+            dangerouslySetInnerHTML={{ __html: quote }} />
         </motion.div>
 
         {/* Bottom tagline */}
-        <motion.p className="font-sans text-[9px] uppercase tracking-[0.25em] mt-12 mb-4" 
+        <motion.p className="font-sans text-[9px] uppercase tracking-[0.25em] mt-12 mb-4"
           style={{ color: 'rgba(255,255,255,0.45)' }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.6 }}
-        >
-          May 17 · 2026 &nbsp;·&nbsp; Jithindas &amp; Dr. Manasa
-        </motion.p>
+          dangerouslySetInnerHTML={{ __html: dateTag }} />
       </div>
     </section>
   )
