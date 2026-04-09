@@ -37,8 +37,8 @@ function FlipUnit({ value, label }) {
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="font-sans text-[10px] uppercase tracking-[0.2em] drop-shadow-sm"
-        style={{ color: 'rgba(255,255,255,0.8)' }}>{label}</span>
+      <span className="font-sans text-xs uppercase tracking-[0.2em] drop-shadow-md"
+        style={{ color: '#FFFFFF', fontWeight: 500, letterSpacing: '0.2em' }}>{label}</span>
     </motion.div>
   )
 }
@@ -80,7 +80,7 @@ export default function CountdownTimer() {
         </svg>
       </div>
 
-      <div className="relative z-10 flex flex-col items-center w-full max-w-4xl">
+      <div className="relative z-20 flex flex-col items-center w-full max-w-4xl">
         <motion.div className="flex items-center gap-4 mb-12"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.6 }}>
