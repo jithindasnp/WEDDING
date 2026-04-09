@@ -77,20 +77,22 @@ export default function HeroSection({
   }, [past, countdownTarget])
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
-  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%'])
+  const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden"
+      className="parallax-section relative min-h-screen flex flex-col items-center justify-center px-6 text-center pb-28 sm:pb-10"
     >
       {/* Parallax Background Image */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: imgY }}>
+      <motion.div className="parallax-layer absolute inset-0 z-0" style={{ y: imgY }}>
         <img
           src={heroBg}
           alt="Couple"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center center', filter: 'brightness(0.78)', minHeight: '120%' }}
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/15 mix-blend-multiply" />
       </motion.div>

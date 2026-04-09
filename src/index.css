@@ -24,6 +24,18 @@
     color: var(--plum);
     overflow-x: hidden;
   }
+  /* Force GPU layer on anything that will animate transform */
+  .parallax-layer {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  /* Contain layout/paint so parallax doesn't affect surrounding flow */
+  .parallax-section {
+    contain: layout style;
+    overflow: hidden;
+  }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #fff0f5; }
   ::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 3px; }

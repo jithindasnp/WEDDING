@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
 
 const particles = [...Array(28)].map((_, i) => ({
   id: i,
@@ -12,7 +11,6 @@ const particles = [...Array(28)].map((_, i) => ({
 }))
 
 export default function NotFoundPage() {
-  const navigate = useNavigate()
 
   return (
     <motion.div
@@ -92,48 +90,13 @@ export default function NotFoundPage() {
       </motion.h1>
 
       <motion.p
-        className="font-sans text-sm mb-10 max-w-xs leading-relaxed"
+        className="font-sans text-sm max-w-xs leading-relaxed"
         style={{ color: 'rgba(242,181,200,0.7)', letterSpacing: '0.04em' }}
         initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.72 }}
       >
         This invitation link doesn't exist.<br />Please use the correct link shared with you.
       </motion.p>
-
-      {/* Buttons */}
-      <motion.div className="flex flex-col sm:flex-row gap-3"
-        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.85 }}>
-        <motion.button
-          onClick={() => navigate('/jithin')}
-          className="px-7 py-3 rounded-full font-sans text-xs uppercase tracking-[0.2em] cursor-pointer"
-          style={{
-            background: 'rgba(242,181,200,0.15)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(242,181,200,0.35)',
-            color: '#F2B5C8',
-          }}
-          whileHover={{ scale: 1.05, background: 'rgba(242,181,200,0.25)' }}
-          whileTap={{ scale: 0.96 }}
-        >
-          J &amp; M Invitation
-        </motion.button>
-
-        <motion.button
-          onClick={() => navigate('/manasa')}
-          className="px-7 py-3 rounded-full font-sans text-xs uppercase tracking-[0.2em] cursor-pointer"
-          style={{
-            background: 'rgba(242,181,200,0.15)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(242,181,200,0.35)',
-            color: '#F2B5C8',
-          }}
-          whileHover={{ scale: 1.05, background: 'rgba(242,181,200,0.25)' }}
-          whileTap={{ scale: 0.96 }}
-        >
-          M &amp; J Invitation
-        </motion.button>
-      </motion.div>
 
       {/* Bottom tag */}
       <motion.p

@@ -31,13 +31,13 @@ export default function ReceptionDetails({
   const ref2 = useRef(null)
   const { scrollYProgress: sp1 } = useScroll({ target: ref1, offset: ['start end', 'end start'] })
   const { scrollYProgress: sp2 } = useScroll({ target: ref2, offset: ['start end', 'end start'] })
-  const imgY1 = useTransform(sp1, [0, 1], ['-10%', '10%'])
-  const imgY2 = useTransform(sp2, [0, 1], ['-10%', '10%'])
+  const imgY1 = useTransform(sp1, [0, 1], ['-6%', '6%'])
+  const imgY2 = useTransform(sp2, [0, 1], ['-6%', '6%'])
 
   return (
     <>
       {/* Date & Time Section */}
-      <section ref={ref1} className="relative py-32 px-6 flex flex-col items-center justify-center min-h-[65vh]">
+      <section ref={ref1} className="parallax-section relative py-32 px-6 flex flex-col items-center justify-center min-h-[65vh]">
         {/* Wave top */}
         <div className="absolute top-0 left-0 w-full z-10" style={{ lineHeight: 0 }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="w-full" style={{ height: 100, display: 'block' }}>
@@ -45,10 +45,11 @@ export default function ReceptionDetails({
           </svg>
         </div>
 
-        <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: imgY1 }}>
+        <motion.div className="parallax-layer absolute inset-0 z-0 overflow-hidden" style={{ y: imgY1 }}>
           <img src={dateBg} alt="Background"
             className="w-full object-cover"
-            style={{ objectPosition: 'center center', filter: 'brightness(0.6)', height: '120%', minHeight: '100%' }} />
+            style={{ objectPosition: 'center center', filter: 'brightness(0.6)', height: '120%', minHeight: '100%' }}
+            loading="lazy" decoding="async" />
           <div className="absolute inset-0 bg-black/25 mix-blend-multiply" />
         </motion.div>
 
@@ -98,7 +99,7 @@ export default function ReceptionDetails({
       </section>
 
       {/* Location & QR Section */}
-      <section ref={ref2} className="relative py-32 px-6 flex flex-col items-center justify-center min-h-[65vh]">
+      <section ref={ref2} className="parallax-section relative py-32 px-6 flex flex-col items-center justify-center min-h-[65vh]">
         {/* Wave top */}
         <div className="absolute top-0 left-0 w-full z-10" style={{ lineHeight: 0 }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="w-full" style={{ height: 100, display: 'block' }}>
@@ -106,10 +107,11 @@ export default function ReceptionDetails({
           </svg>
         </div>
 
-        <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: imgY2 }}>
+        <motion.div className="parallax-layer absolute inset-0 z-0 overflow-hidden" style={{ y: imgY2 }}>
           <img src={locationBg} alt="Venue background"
             className="w-full object-cover"
-            style={{ objectPosition: 'center center', filter: 'brightness(0.55)', height: '120%', minHeight: '100%' }} />
+            style={{ objectPosition: 'center center', filter: 'brightness(0.55)', height: '120%', minHeight: '100%' }}
+            loading="lazy" decoding="async" />
           <div className="absolute inset-0 bg-black/30 mix-blend-multiply" />
         </motion.div>
 

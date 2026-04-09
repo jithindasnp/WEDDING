@@ -9,10 +9,10 @@ export default function FamilyHosts({
 }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%'])
 
   return (
-    <section ref={ref} className="relative py-32 px-6 flex flex-col items-center justify-center min-h-[70vh]">
+    <section ref={ref} className="parallax-section relative py-32 px-6 flex flex-col items-center justify-center min-h-[70vh]">
 
       {/* Wave divider — top */}
       <div className="absolute top-0 left-0 w-full z-10" style={{ lineHeight: 0 }}>
@@ -22,9 +22,10 @@ export default function FamilyHosts({
       </div>
 
       {/* Parallax Background */}
-      <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: imgY }}>
+      <motion.div className="parallax-layer absolute inset-0 z-0 overflow-hidden" style={{ y: imgY }}>
         <img src={bg} alt="Wedding background" className="w-full object-cover"
-          style={{ objectPosition: 'center center', filter: 'brightness(0.48)', height: '120%', minHeight: '100%' }} />
+          style={{ objectPosition: 'center center', filter: 'brightness(0.48)', height: '120%', minHeight: '100%' }}
+          loading="lazy" decoding="async" />
         <div className="absolute inset-0 bg-black/35 mix-blend-multiply" />
       </motion.div>
 

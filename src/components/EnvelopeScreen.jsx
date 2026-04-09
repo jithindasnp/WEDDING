@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
   const [clicked, setClicked] = useState(false)
@@ -7,15 +7,20 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
   const handleOpen = () => {
     if (clicked) return
     setClicked(true)
-    setTimeout(onOpen, 900)
   }
 
   return (
     <motion.div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-10"
-      style={{ background: 'radial-gradient(ellipse at center, #4a1530 0%, #220a15 100%)' }}
-      animate={clicked ? { opacity: 0, scale: 1.04 } : { opacity: 1, scale: 1 }}
-      transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
+      style={{
+        background: 'radial-gradient(ellipse at center, #4a1530 0%, #220a15 100%)',
+      }}
+      // Iris-close: the envelope screen contracts to a point at the seal center
+      initial={{ clipPath: 'circle(150% at 50% 50%)' }}
+      animate={clicked ? { clipPath: 'circle(0% at 50% 50%)' } : { clipPath: 'circle(150% at 50% 50%)' }}
+      transition={{ duration: 1.5, ease: [0.55, 0, 1, 0.45] }}
+      // Once the circle fully closes, hand off to parent
+      onAnimationComplete={() => { if (clicked) onOpen() }}
     >
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -25,7 +30,7 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
               width: i % 3 === 0 ? 3 : 2, height: i % 3 === 0 ? 3 : 2,
               background: i % 2 === 0 ? '#F2B5C8' : '#D4768E',
               left: `${5 + Math.random() * 90}%`,
-              top: `${5 + Math.random() * 90}%`,
+              top:  `${5 + Math.random() * 90}%`,
             }}
             animate={{ opacity: [0.1, 0.55, 0.1], scale: [1, 1.6, 1] }}
             transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 3 }}
@@ -44,7 +49,7 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
         Wedding Invitation
       </motion.p>
 
-      {/* Envelope  */}
+      {/* Envelope */}
       <motion.div
         className="relative cursor-pointer select-none"
         style={{ width: 300, height: 210 }}
@@ -52,8 +57,8 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.55, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         onClick={handleOpen}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
+        whileHover={!clicked ? { scale: 1.03 } : {}}
+        whileTap={!clicked ? { scale: 0.96 } : {}}
       >
         {/* Body */}
         <div className="absolute inset-0 rounded-xl" style={{
@@ -77,7 +82,7 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
           borderRadius: '0 0 12px 0',
         }} />
 
-        {/* Top flap (static, closed) */}
+        {/* Top flap */}
         <div className="absolute top-0 left-0 w-full overflow-hidden" style={{ height: '50%', zIndex: 10 }}>
           <div style={{
             width: '100%', height: '200%',
@@ -93,19 +98,38 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
 
         {/* Wax Seal */}
         <div className="absolute left-1/2 z-20" style={{ top: '50%', transform: 'translate(-50%, -50%)' }}>
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            style={{ boxShadow: '0 0 30px 12px rgba(212,118,142,0.38)' }}
-            animate={{ opacity: [0.45, 1, 0.45] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-          />
-          {[0, 0.9].map((delay, i) => (
-            <motion.div key={i} className="absolute rounded-full"
-              style={{ inset: -10, border: '1.5px solid rgba(212,118,142,0.55)' }}
-              animate={{ scale: [1, 1.8], opacity: [0.7, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay }}
-            />
-          ))}
+
+          {/* Burst rings on click */}
+          <AnimatePresence>
+            {clicked && [0, 0.12, 0.26].map((delay, i) => (
+              <motion.div key={i} className="absolute rounded-full pointer-events-none"
+                style={{ inset: -8, border: '2px solid rgba(242,181,200,0.7)' }}
+                initial={{ scale: 1, opacity: 0.85 }}
+                animate={{ scale: 6 + i * 2, opacity: 0 }}
+                transition={{ duration: 1.0, ease: 'easeOut', delay }}
+              />
+            ))}
+          </AnimatePresence>
+
+          {/* Idle pulse glow */}
+          {!clicked && (
+            <>
+              <motion.div className="absolute inset-0 rounded-full"
+                style={{ boxShadow: '0 0 30px 12px rgba(212,118,142,0.38)' }}
+                animate={{ opacity: [0.45, 1, 0.45] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+              />
+              {[0, 0.9].map((delay, i) => (
+                <motion.div key={i} className="absolute rounded-full"
+                  style={{ inset: -10, border: '1.5px solid rgba(212,118,142,0.55)' }}
+                  animate={{ scale: [1, 1.8], opacity: [0.7, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay }}
+                />
+              ))}
+            </>
+          )}
+
+          {/* Seal disc */}
           <div className="relative flex items-center justify-center rounded-full" style={{
             width: 80, height: 80,
             background: 'radial-gradient(circle at 35% 32%, #f0a0be, #c45a7a 55%, #943050)',
@@ -129,7 +153,7 @@ export default function EnvelopeScreen({ onOpen, monogram = 'J&M' }) {
         style={{ color: 'rgba(242,181,200,0.42)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: clicked ? 0 : 0.42 }}
-        transition={{ delay: 0.9, duration: 0.8 }}
+        transition={{ delay: 0.9, duration: 0.5 }}
       >
         Tap the seal to open
       </motion.p>
