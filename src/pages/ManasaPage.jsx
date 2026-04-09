@@ -44,7 +44,7 @@ export default function ManasaPage() {
         />
         <FamilyHosts
           bg="/photos/IMG-20250928-WA0043.jpg"
-          quote="Wishes &amp; Compliments from:<br/><span style='font-size:0.65em;opacity:0.9'>Sheeja, Sayooj Vijayan, Vasanthi, relatives &amp; friends</span>"
+          quote="Wishes &amp; Compliments from:<br/><span style='font-size:0.65em;opacity:0.9'>Sheeja PP, Sayooj Vijayan, Vasanthi, relatives &amp; friends</span>"
           dateTag="May 17 · 2026 &nbsp;·&nbsp; Dr. Manasa &amp; Jithindas"
         />
       </motion.main>
