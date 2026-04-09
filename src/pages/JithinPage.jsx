@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
 import EnvelopeScreen   from '../components/EnvelopeScreen'
 import HeroSection      from '../components/HeroSection'
 import ReceptionDetails from '../components/ReceptionDetails'
@@ -10,6 +11,13 @@ export default function JithinPage() {
 
   return (
     <div className="relative min-h-screen bg-mesh font-sans">
+      <Helmet>
+        <title>Wedding Reception — Jithindas & Dr. Manasa</title>
+        <meta property="og:title" content="Wedding Reception — Jithindas & Dr. Manasa" />
+        <meta property="og:description" content="Please join us to celebrate the wedding reception of Jithindas and Dr. Manasa on May 17, 2026." />
+        <meta property="og:image" content="https://wedding.jithindas.com/og-preview.jpg" />
+        <meta property="og:url" content="https://wedding.jithindas.com/jithin" />
+      </Helmet>
 
       {/* Main content — always mounted behind the envelope */}
       <motion.main
