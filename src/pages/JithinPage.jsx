@@ -48,7 +48,7 @@ export default function JithinPage() {
         />
         <FamilyHosts
           bg="/photos/IMG-20250928-WA0043.jpg"
-          quote="With love from relatives &amp; friends"
+          quote="<small style='font-size:0.5em; opacity:0.8; font-style:normal; font-family:sans-serif; letter-spacing:0.2em; text-transform:uppercase'>Wishes &amp; Compliments from:</small><br/>Krishnadasan, Geetha, Akshaykrishna, Aswanthkrishna, relatives &amp; friends"
           dateTag="May 17 · 2026 &nbsp;·&nbsp; Jithindas &amp; Dr. Manasa"
         />
       </motion.main>

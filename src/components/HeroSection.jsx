@@ -199,11 +199,11 @@ export default function HeroSection({
       </div>
 
       {/* Scroll indicator */}
-      <motion.div className="absolute bottom-12 flex flex-col items-center gap-2 bounce-arrow z-20"
+      <motion.div className="absolute bottom-[12vh] sm:bottom-12 flex flex-col items-center gap-2 bounce-arrow z-20"
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ delay: 1.8, duration: 0.8 }}>
-        <span className="font-sans text-[9px] uppercase tracking-[0.3em]" style={{ color: 'rgba(255,255,255,0.65)' }}>
+        <span className="font-sans text-[9px] uppercase tracking-[0.3em] sm:hidden" style={{ color: 'rgba(255,255,255,0.65)' }}>
           Scroll Down
         </span>
         <ChevronDown size={28} style={{ color: 'rgba(255,255,255,0.65)' }} />
