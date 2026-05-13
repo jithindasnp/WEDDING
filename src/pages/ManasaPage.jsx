@@ -45,10 +45,6 @@ export default function ManasaPage() {
           qrSrc="/photos/manasa home.png"
           qrLabel="Scan for Location"
           mapsUrl="https://maps.app.goo.gl/XNBHkY7ewrWkdDL46"
-          extraNote={
-            `Pre-wedding Ceremony on <strong>Saturday, 16th May 2026</strong><br/>
-            at our residence, between <strong>3 PM &amp; 9 PM</strong>`
-          }
         />
         <FamilyHosts
           bg="/photos/IMG-20250928-WA0043.jpg"

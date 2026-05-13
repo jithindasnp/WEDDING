@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import JithinPage   from './pages/JithinPage'
 import ManasaPage   from './pages/ManasaPage'
+import LocationsPage from './pages/LocationsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
     <Routes>
       <Route path="/jithin" element={<JithinPage />} />
       <Route path="/manasa" element={<ManasaPage />} />
+      <Route path="/locations" element={<LocationsPage />} />
       <Route path="*"       element={<NotFoundPage />} />
     </Routes>
   )
